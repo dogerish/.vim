@@ -3,7 +3,6 @@ source $VIMRUNTIME/defaults.vim
 " Switch syntax highlighting on when the terminal has colors or when using the
 " GUI (which always has colors).
 if &t_Co > 2 || has("gui_running")
-	" Revert with ":syntax off".
 	syntax on
 endif
 filetype on
@@ -39,16 +38,10 @@ autocmd FileType markdown set spell
 " visual line movement (for line wrapping)
 nnoremap <C-K> gk
 nnoremap <C-J> gj
-" tab and shift-tab bindings
-nnoremap <Tab> >
-nnoremap <S-Tab> <
-" map functions to visual mode tab and shift-tab
-vnoremap <Tab> >
-vnoremap <S-Tab> <
-
 
 " collapse based on syntax with folds
 set foldmethod=syntax
+autocmd FileType javascript set foldmethod=indent
 " not by default tho
 set nofoldenable
 
@@ -79,8 +72,8 @@ set smartcase
 set nohls
 
 " color scheme
-colorscheme mine
 set background=dark
+colorscheme mine
 
 " 2 lines more context before scrolling up
 set scrolloff=2
