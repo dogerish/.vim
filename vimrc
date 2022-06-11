@@ -95,6 +95,8 @@ set number
 set sessionoptions=buffers,winsize,tabpages,curdir
 
 " custom commands
+" paste the output of a command into a new tab
+command! -nargs=* -complete=shellcmd TabCmd tabe | execute 'r !' . expand('<args>') | 1del
 " opens up header and implementation files with base name arg 1
 command! -nargs=1 -complete=file OpenPair e <args>.h <bar> vsplit <args>.cpp
 command! -nargs=1 -complete=file TabOpenPair tabe <bar> OpenPair <args>
