@@ -1,12 +1,13 @@
 source $VIMRUNTIME/defaults.vim
-filetype plugin on
+filetype on
+filetype plugin indent on
+helptags ALL
 
 " Switch syntax highlighting on when the terminal has colors or when using the
 " GUI (which always has colors).
 if &t_Co > 2 || has("gui_running")
 	syntax on
 endif
-filetype on
 " Add optional packages.
 "
 " The matchit plugin makes the % command work better, but it is not backwards
@@ -29,8 +30,6 @@ set backspace=indent,eol,start
 " keep indent
 set autoindent
 set copyindent
-" do be so smart
-filetype indent on
 autocmd FileType html     set ts=2 sw=2
 autocmd FileType markdown set spell
 autocmd BufRead,BufNewFile */evobot/* set expandtab ts=2 sw=2
