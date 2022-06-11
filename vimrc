@@ -1,4 +1,5 @@
 source $VIMRUNTIME/defaults.vim
+filetype plugin on
 
 " Switch syntax highlighting on when the terminal has colors or when using the
 " GUI (which always has colors).
@@ -28,12 +29,11 @@ set backspace=indent,eol,start
 " keep indent
 set autoindent
 set copyindent
-" don't be so smart
-filetype indent off
-autocmd FileType *        set ts=8 sw=8
-autocmd FileType python   set ts=4 sw=4 expandtab
+" do be so smart
+filetype indent on
 autocmd FileType html     set ts=2 sw=2
 autocmd FileType markdown set spell
+autocmd BufRead,BufNewFile */evobot/* set expandtab ts=2 sw=2
 
 " visual line movement (for line wrapping)
 nnoremap <C-K> gk
