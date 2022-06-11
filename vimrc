@@ -50,6 +50,7 @@ set nofoldenable
 set ruler
 " highlight which line the cursor is on
 set cursorline
+set cursorlineopt=screenline,number
 " show incomplete commands
 set showcmd
 " show line with completion options
@@ -87,6 +88,8 @@ set autoread
 
 " always show tab line
 set showtabline=2
+" show line numbers
+set number
 
 " save only the buffers, window sizes, tab pages, and current directory of session
 set sessionoptions=buffers,winsize,tabpages,curdir

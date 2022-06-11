@@ -1,6 +1,12 @@
 runtime colors/slate.vim
 let colors_name = "mine"
 
+" magenta line number
+hi LineNr term=italic ctermfg=DarkMagenta guifg=DarkMagenta
+" line of cursor and line number of cursor
+hi CursorLine term=underline cterm=underline gui=underline
+hi CursorLineNr term=bold cterm=NONE ctermfg=LightGray gui=NONE guifg=LightGray
+
 " make tab bar less intense
 hi TabLineFill ctermfg=DarkGray guifg=DarkGray
 hi TabLineSel ctermfg=Magenta guifg=Magenta
@@ -15,8 +21,6 @@ hi StatusLineNC cterm=NONE ctermfg=DarkCyan ctermbg=Black guifg=Cyan guibg=Black
 hi StatusLineTerm term=bold cterm=bold ctermfg=Green ctermbg=Black gui=bold guifg=Green guibg=Black
 " dark green on black
 hi StatusLineTermNC cterm=NONE ctermfg=DarkGreen ctermbg=Black guifg=DarkGreen guibg=Black
-" highlight instead of underline cursorline
-hi CursorLine term=underline cterm=underline gui=underline
 
 " make vertical splitter less intense; white on black
 hi VertSplit cterm=NONE ctermbg=Black ctermfg=White guibg=Black guifg=White
