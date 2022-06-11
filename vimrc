@@ -36,8 +36,10 @@ autocmd FileType markdown set spell
 autocmd BufRead,BufNewFile */evobot/* set expandtab ts=2 sw=2
 
 " visual line movement (for line wrapping)
-nnoremap <C-K> gk
-nnoremap <C-J> gj
+noremap <C-K> gk
+noremap <C-J> gj
+" escape sequence timeout to 5 seconds to reduce hanging
+set ttimeoutlen=5
 
 " collapse based on syntax with folds
 set foldmethod=syntax
@@ -57,10 +59,9 @@ set wildmenu
 set mouse=a
 
 " backups and undo files in /tmp
-set backup
-set backupdir=/tmp/
+set nobackup
 set undofile
-set undodir=/tmp/
+set undodir=$HOME/.vim/.undo
 " make swap files
 set swapfile
 
