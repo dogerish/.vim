@@ -33,6 +33,8 @@ set copyindent
 autocmd FileType html     set ts=2 sw=2
 autocmd FileType markdown set spell
 autocmd BufRead,BufNewFile */evobot/* set expandtab ts=2 sw=2
+" put space after comments for nerdcommenter
+let g:NERDSpaceDelims=1
 
 " visual line movement (for line wrapping)
 noremap <C-K> gk
