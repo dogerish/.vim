@@ -36,6 +36,10 @@ autocmd BufRead,BufNewFile */evobot/* set expandtab ts=2 sw=2
 " put space after comments for nerdcommenter
 let g:NERDSpaceDelims=1
 
+" bind arrow keys to visual line movements
+noremap <Up> gk
+noremap <Down> gj
+
 " escape sequence timeout to 5 seconds to reduce hanging
 set ttimeoutlen=5
 
