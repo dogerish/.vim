@@ -27,7 +27,7 @@ hi Visual                          cterm=reverse                                
 hi WarningMsg                                           ctermfg=DarkRed                                                     guifg=Salmon
 hi String                                               ctermfg=DarkCyan                                                    guifg=SkyBlue
 hi Comment          term=bold                           ctermfg=Gray                                                        guifg=Gray50
-hi Constant                                             ctermfg=Brown                                                       guifg=Brown
+hi Constant                                             ctermfg=Brown                                                       guifg=Orange
 hi Special                                              ctermfg=Brown                                                       guifg=DarkKhaki
 hi Identifier                                           ctermfg=Red                                                         guifg=Salmon
 hi Include                                              ctermfg=Red                                                         guifg=Red
@@ -47,10 +47,10 @@ hi Directory                                            ctermfg=DarkCyan
 hi ErrorMsg                        cterm=bold           ctermfg=LightGray   ctermbg=DarkRed                                 guifg=White          guibg=Red
 hi VisualNOS                       cterm=bold,underline
 hi WildMenu                                             ctermfg=Black       ctermbg=DarkYellow
-hi DiffAdd                                                                  ctermbg=DarkBlue
-hi DiffChange                                                               ctermbg=DarkMagenta
-hi DiffDelete                      cterm=bold           ctermfg=DarkBlue    ctermbg=DarkCyan
-hi DiffText                        cterm=bold                               ctermbg=DarkRed
+hi DiffAdd                                                                  ctermbg=DarkGreen                                                    guibg=DarkGreen
+hi DiffChange                                                               ctermbg=DarkBlue                                                     guibg=DarkBlue
+hi DiffDelete                      cterm=bold           ctermfg=Red         ctermbg=DarkRed                                 guifg=Red            guibg=DarkRed
+hi DiffText                        cterm=bold           ctermfg=Black       ctermbg=Yellow                                  guifg=Black          guibg=Yellow
 hi Underlined                      cterm=underline      ctermfg=DarkMagenta
 hi Error                           cterm=bold           ctermfg=LightGray   ctermbg=DarkRed                                 guifg=White          guibg=Red
 hi SpellErrors                     cterm=bold           ctermfg=LightGray   ctermbg=DarkRed                                 guifg=White          guibg=Red
