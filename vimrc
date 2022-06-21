@@ -1,4 +1,12 @@
 source $VIMRUNTIME/defaults.vim
+language message en_us
+source $VIMRUNTIME/delmenu.vim
+source $VIMRUNTIME/menu.vim
+
+" color scheme
+set background=dark
+colorscheme dogerish
+
 filetype on
 filetype plugin indent on
 helptags ALL
@@ -21,17 +29,39 @@ endif
 " don't redraw during macros
 set lazyredraw
 
-" draw line at column 100
-set cc=100
+" don't wrap lines when they go off screen
+set nowrap
+" draw line at column just after textwidth
+set colorcolumn=+1
+set textwidth=79
+set tabstop=4 shiftwidth=4
+
+" no more blinking cursor in gui
+set guicursor=a:blinkon0
+" set gui font (yoinked from setting-guifont help tag)
+if has("gui_running")
+	if has("gui_gtk2")
+		set guifont=Luxi\ Mono\ 12
+	elseif has("x11")
+		" Also for GTK 1
+		set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+	elseif has("gui_win32")
+		set guifont=Luxi_Mono:h12:cANSI
+	elseif has("gui_macvim")
+		set guifont=Menlo\ Regular:h12
+	endif
+endif
 
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
+set formatoptions=croqanj
+set spelllang=en_us,de
 " keep indent
 set autoindent
 set copyindent
 autocmd FileType html     set ts=2 sw=2
-autocmd FileType markdown set spell
+autocmd FileType markdown set spell formatoptions+=t
 autocmd BufRead,BufNewFile */evobot/* set expandtab ts=2 sw=2
 " put space after comments for nerdcommenter
 let g:NERDSpaceDelims=1
@@ -58,8 +88,8 @@ set cursorlineopt=screenline,number
 set showcmd
 " show line with completion options
 set wildmenu
-" enable mouse usage for all modes
-set mouse=a
+" disable mouse usage for all modes
+set mouse=
 
 " backups and undo files in /tmp
 set nobackup
@@ -74,10 +104,6 @@ set ignorecase
 " if a capital letter is included, use case sensitive
 set smartcase
 set nohls
-
-" color scheme
-set background=dark
-colorscheme mine
 
 " 2 lines more context before scrolling up
 set scrolloff=2
