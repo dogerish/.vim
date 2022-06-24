@@ -20,6 +20,11 @@ xmap ga <Plug>(EasyAlign)
 if &t_Co > 2 || has("gui_running")
 	syntax on
 endif
+" fix mac terminal italics issue
+if &t_Co > 2 && has("macunix")
+	let &t_ZH = "\e[3m"
+	let &t_ZR = "\e[23m"
+endif
 " Add optional packages.
 "
 " The matchit plugin makes the % command work better, but it is not backwards
@@ -59,7 +64,7 @@ endif
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
-set formatoptions=croqanj
+set formatoptions=croqwanj
 set spelllang=en_us,de
 " keep indent
 set autoindent
