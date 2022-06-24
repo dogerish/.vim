@@ -11,6 +11,10 @@ filetype on
 filetype plugin indent on
 helptags ALL
 
+" Set up bindings for easy-align plugin
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+
 " Switch syntax highlighting on when the terminal has colors or when using the
 " GUI (which always has colors).
 if &t_Co > 2 || has("gui_running")
