@@ -11,9 +11,20 @@ filetype on
 filetype plugin indent on
 helptags ALL
 
+" read 5 lines for modelines
+set modelines=5
+
 " Set up bindings for easy-align plugin
 nmap ga <Plug>(EasyAlign)
 xmap ga <Plug>(EasyAlign)
+" add //-comment based alignment
+let g:easy_align_delimiters = {
+\ '/': {
+	\ 'pattern': '//\+',
+	\ 'delimiter_align': 'l',
+	\ 'ignore_groups': ['!Comment']
+	\ }
+\ }
 
 " Switch syntax highlighting on when the terminal has colors or when using the
 " GUI (which always has colors).
@@ -43,7 +54,9 @@ set nowrap
 " draw line at column just after textwidth
 set colorcolumn=+1
 set textwidth=79
-set tabstop=4 shiftwidth=4
+" tabstop at 4, shift 4 spaces with < or >, and <tab> and <BS> add or delete 
+" shiftwidth spaces
+set tabstop=4 shiftwidth=4 softtabstop=-1
 
 " no more blinking cursor in gui
 set guicursor=a:blinkon0
@@ -64,14 +77,18 @@ endif
 " Allow backspacing over everything in insert mode.
 set backspace=indent,eol,start
 
-set formatoptions=croqwanj
+" :h fo-table
+set formatoptions=croqwan2j
+" don't join to use two spaces after end of sentence
+set nojoinspaces
 set spelllang=en_us,de
-" keep indent
-set autoindent
-set copyindent
-autocmd FileType html     set ts=2 sw=2
-autocmd FileType markdown set spell formatoptions+=t
-autocmd BufRead,BufNewFile */evobot/* set expandtab ts=2 sw=2
+" indentation smartness
+set copyindent autoindent
+" only do one shiftwidth inside of unclosed paranthesis, and line up closing 
+" parenthesis with indentation level of the matching one
+set cinoptions+=(s,m1,:0
+" read config files in current directory for project-specific settings
+set exrc secure
 " put space after comments for nerdcommenter
 let g:NERDSpaceDelims=1
 
@@ -84,7 +101,6 @@ set ttimeoutlen=5
 
 " collapse based on syntax with folds
 set foldmethod=syntax
-autocmd FileType javascript set foldmethod=indent
 " not by default tho
 set nofoldenable
 
@@ -124,8 +140,10 @@ set noerrorbells
 " auto read when file changed outside of vim
 set autoread
 
-" always show tab line
-set showtabline=2
+" always show status line
+set laststatus=2
+" allow switching buffers when unsaved changes exist
+set hidden
 " show line numbers
 set number
 
