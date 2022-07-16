@@ -95,6 +95,8 @@ let g:NERDSpaceDelims=1
 " bind arrow keys to visual line movements
 noremap <Up> gk
 noremap <Down> gj
+" close help window
+noremap <C-W>hc :helpclose<CR>
 
 " escape sequence timeout to 5 seconds to reduce hanging
 set ttimeoutlen=5
