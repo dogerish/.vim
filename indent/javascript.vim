@@ -359,7 +359,8 @@ function GetJavascriptIndent()
     if b:js_cache[0] == v:lnum - 1 && s:Balanced(v:lnum-1,getline(v:lnum-1))
       let b:js_cache[0] = v:lnum
     endif
-    return -1
+    " FIXME: hacky patch to fix strings losing indentation - commented this:
+    " return -1
   endif
 
   let nest = get(get(b:,'hi_indent',{}),'blocklnr')
@@ -475,3 +476,4 @@ endfunction
 
 let &cpo = s:cpo_save
 unlet s:cpo_save
+" vim: expandtab: set ts=2 sw=2 sts=2
