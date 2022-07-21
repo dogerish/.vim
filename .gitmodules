@@ -10,3 +10,6 @@
 [submodule "pack/plugins/start/vim-easy-align"]
 	path = pack/plugins/start/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
+[submodule "pack/plugins/start/dogformat"]
+	path = pack/plugins/start/dogformat
+	url = https://github.com/dogerish/dogformat
