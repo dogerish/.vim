@@ -60,6 +60,7 @@ set tabstop=4 shiftwidth=4 softtabstop=-1
 
 " no more blinking cursor in gui
 set guicursor=a:blinkon0
+set guioptions=egm
 " set gui font (yoinked from setting-guifont help tag)
 if has("gui_running")
 	if has("gui_gtk2")
