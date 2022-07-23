@@ -20,21 +20,21 @@ xmap ga <Plug>(EasyAlign)
 " add //-comment based alignment
 let g:easy_align_delimiters = {
 \ '/': {
-	\ 'pattern': '//\+',
-	\ 'delimiter_align': 'l',
-	\ 'ignore_groups': ['!Comment']
-	\ }
+    \ 'pattern': '//\+',
+    \ 'delimiter_align': 'l',
+    \ 'ignore_groups': ['!Comment']
+    \ }
 \ }
 
 " Switch syntax highlighting on when the terminal has colors or when using the
 " GUI (which always has colors).
 if &t_Co > 2 || has("gui_running")
-	syntax on
+    syntax on
 endif
 " fix mac terminal italics issue
 if &t_Co > 2 && has("macunix")
-	let &t_ZH = "\e[3m"
-	let &t_ZR = "\e[23m"
+    let &t_ZH = "\e[3m"
+    let &t_ZR = "\e[23m"
 endif
 " Add optional packages.
 "
@@ -43,7 +43,7 @@ endif
 " The ! means the package won't be loaded right away but when plugins are
 " loaded during initialization.
 if has('syntax') && has('eval')
-	packadd! matchit
+    packadd! matchit
 endif
 
 " don't redraw during macros
@@ -54,25 +54,26 @@ set nowrap
 " draw line at column just after textwidth
 set colorcolumn=+1
 set textwidth=79
-" tabstop at 4, shift 4 spaces with < or >, and <tab> and <BS> add or delete 
-" shiftwidth spaces
-set tabstop=4 shiftwidth=4 softtabstop=-1
+" tabstop at 8, shift 4 spaces with < or >, and <tab> and <BS> add or delete 
+" shiftwidth spaces. i use expandtab by default so that the visual line length 
+" is consistent, making textwidth make sense on all platforms.
+set tabstop=8 shiftwidth=4 softtabstop=-1 expandtab
 
 " no more blinking cursor in gui
 set guicursor=a:blinkon0
 set guioptions=egm
 " set gui font (yoinked from setting-guifont help tag)
 if has("gui_running")
-	if has("gui_gtk2")
-		set guifont=Luxi\ Mono\ 12
-	elseif has("x11")
-		" Also for GTK 1
-		set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
-	elseif has("gui_win32")
-		set guifont=Luxi_Mono:h12:cANSI
-	elseif has("gui_macvim")
-		set guifont=Menlo\ Regular:h12
-	endif
+    if has("gui_gtk2")
+        set guifont=Luxi\ Mono\ 12
+    elseif has("x11")
+        " Also for GTK 1
+        set guifont=*-lucidatypewriter-medium-r-normal-*-*-180-*-*-m-*-*
+    elseif has("gui_win32")
+        set guifont=Luxi_Mono:h12:cANSI
+    elseif has("gui_macvim")
+        set guifont=Menlo\ Regular:h12
+    endif
 endif
 
 " Allow backspacing over everything in insert mode.
