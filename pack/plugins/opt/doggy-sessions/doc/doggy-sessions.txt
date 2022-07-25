@@ -1,0 +1,56 @@
+*doggy-sessions.txt*    For Vim version 8.2     Last change: July 25 2022
+
+Help on Doggy Sessions                                        *doggy-sessions*
+
+Doggy Sessions is a simple plugin by dogerish that makes managing sessions a 
+little easier.
+
+1. Commands                                          |doggy-sessions-commands|
+2. Variables                                        |doggy-sessions-variables|
+
+==============================================================================
+1. Commands                                          *doggy-sessions-commands*
+
+Session Names                                           *doggy-sessions-names*
+        Sessions can be named manually or automatically. The session name for 
+        a command is determined by the first valid condition of the following:
+
+        1. If [session] is provided. The session will be saved under this name 
+           after the name is cleansed. |doggy-sessions-name-cleansing|
+        2. If |v:this_session| is not empty. The session will be saved in this 
+           file path. No modification is done.
+        3. None of the above conditions were met. The session name is assumed 
+           to be the tail of the current working directory. This name is then 
+           cleansed. |doggy-sessions-name-cleansing|
+        
+        Name Cleansing                         *doggy-sessions-name-cleansing*
+                Session names are cleansed with the following steps before 
+                being used as file names.
+                
+                - All "." characters are replaced with "_"
+                - |g:sessions_dir| is prepended
+                - The .vim extension is appended
+
+ListSessions                              *ListSessions* *doggy-sessions-list*
+        Lists sessions.
+
+SaveSession[!] [session]                   *SaveSession* *doggy-sessions-save*
+        Saves a session. |doggy-sessions-names|
+
+LoadSession [session]
+        Loads a session. |doggy-sessions-names|
+
+DelSession [session]
+        Deletes a session. |doggy-sessions-names|
+
+==============================================================================
+2. Variables                                        *doggy-sessions-variables*
+
+Sessions Directory                                            *g:sessions_dir*
+        Default: $HOME/.vim/sessions
+        Before the g:sessions_dir variable is used, the script creates the 
+        directory if directory doesn't exist, and appends a slash if 
+        g:sessions_dir doesn't already end with one. The default value is used 
+        if the variable doesn't exist or is empty.
+
+vim:et:ts=8:sw=8:sts=8:norl:ft=help:

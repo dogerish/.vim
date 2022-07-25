@@ -1,0 +1,11 @@
+ListSessions	doggy-sessions.txt	/*ListSessions*
+SaveSession	doggy-sessions.txt	/*SaveSession*
+doggy-sessions	doggy-sessions.txt	/*doggy-sessions*
+doggy-sessions-commands	doggy-sessions.txt	/*doggy-sessions-commands*
+doggy-sessions-list	doggy-sessions.txt	/*doggy-sessions-list*
+doggy-sessions-name-cleansing	doggy-sessions.txt	/*doggy-sessions-name-cleansing*
+doggy-sessions-names	doggy-sessions.txt	/*doggy-sessions-names*
+doggy-sessions-save	doggy-sessions.txt	/*doggy-sessions-save*
+doggy-sessions-variables	doggy-sessions.txt	/*doggy-sessions-variables*
+doggy-sessions.txt	doggy-sessions.txt	/*doggy-sessions.txt*
+g:sessions_dir	doggy-sessions.txt	/*g:sessions_dir*

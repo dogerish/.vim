@@ -45,6 +45,8 @@ endif
 if has('syntax') && has('eval')
     packadd! matchit
 endif
+" load session manager
+packadd! doggy-sessions
 
 " don't redraw during macros
 set lazyredraw
