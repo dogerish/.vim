@@ -55,7 +55,7 @@ set lazyredraw
 set nowrap
 " draw line at column just after textwidth
 set colorcolumn=+1
-set textwidth=78
+set textwidth=79
 " tabstop at 8, shift 4 spaces with < or >, and <tab> and <BS> add or delete 
 " shiftwidth spaces. i use expandtab by default so that the visual line length 
 " is consistent, making textwidth make sense on all platforms.
