@@ -53,7 +53,7 @@ set lazyredraw
 set nowrap
 " draw line at column just after textwidth
 set colorcolumn=+1
-set textwidth=79
+set textwidth=78
 " tabstop at 8, shift 4 spaces with < or >, and <tab> and <BS> add or delete 
 " shiftwidth spaces. i use expandtab by default so that the visual line length 
 " is consistent, making textwidth make sense on all platforms.
@@ -151,12 +151,37 @@ set hidden
 " show line numbers
 set number
 
-" save only the buffers, window sizes, tab pages, and current directory of session
+" save only the buffers, window sizes, tab pages, and current directory of 
+" session
 set sessionoptions=buffers,winsize,tabpages,curdir
 
-" custom commands
+" highlight modelines
+augroup GLOBALSYNTAX
+    autocmd!
+    autocmd Syntax * {
+        syn match ModeLine
+                    \ '^.*\%(vim\=\|ex\)\%(:\s*set\=\)\@!\%(:[^:]\+\)\+.*$'
+                    \ contains=@NoSpell
+        syn match ModeLine
+                    \ '^.*\%(vi\|[vV]im\%([<=>]\=[0-9]\+\)\=\|ex\):\s*set\= .\+:.*$'
+                    \ contains=@NoSpell
+        hi def link ModeLine SpecialComment
+        }
+augroup END
+                             " custom commands "
+" commands for inserting a separator that spans the textwidth or 80 chars
+def GetSep(char = "="): string
+    return repeat(char, &tw ?? 80)
+enddef
+command! -nargs=? -bar Separator vim9cmd
+            \ append(line('.') - 1, ['', GetSep(<f-args>)])
+command! -nargs=? -bar SetSeparator vim9cmd setline('.', GetSep(<f-args>))
 " paste the output of a command into a new tab
-command! -nargs=* -complete=shellcmd TabCmd tabe | execute 'r !' . expand('<args>') | 1del
+command! -nargs=* -complete=shellcmd TabCmd {
+    tabe
+    execute 'r !' .. <q-args>
+    :1d
+    }
 " opens up header and implementation files with base name arg 1
 command! -nargs=1 -complete=file OpenPair e <args>.h <bar> vsplit <args>.cpp
 command! -nargs=1 -complete=file TabOpenPair tabe <bar> OpenPair <args>
