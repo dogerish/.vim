@@ -53,4 +53,4 @@ Sessions Directory                                            *g:sessions_dir*
         g:sessions_dir doesn't already end with one. The default value is used 
         if the variable doesn't exist or is empty.
 
-vim:et:ts=8:sw=8:sts=8:norl:ft=help:
+vim:tw=78:ts=8:sw=8:sts=8:et:ft=help:norl:
