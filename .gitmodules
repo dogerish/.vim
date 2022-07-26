@@ -5,11 +5,11 @@
 	path = pack/plugins/start/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator
 [submodule "pack/plugins/start/vim-indent-object"]
-	path = pack/plugins/start/vim-indent-object
+	path = pack/objects/start/vim-indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object
 [submodule "pack/plugins/start/vim-easy-align"]
-	path = pack/plugins/start/vim-easy-align
+	path = pack/syntax/start/vim-easy-align
 	url = https://github.com/junegunn/vim-easy-align.git
 [submodule "pack/plugins/start/dogformat"]
-	path = pack/plugins/start/dogformat
+	path = pack/syntax/start/dogformat
 	url = https://github.com/dogerish/dogformat
