@@ -3,3 +3,4 @@
 *.swp
 /spell/*.add.spl
 Session.vim
+/sessions
