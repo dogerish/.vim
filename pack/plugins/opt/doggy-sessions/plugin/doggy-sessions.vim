@@ -2,42 +2,42 @@ vim9script
 
 # lists sessions in sessions_dir
 command -bar ListSessions
-            \ echo 'Sessions in ' .. s:GetSesDir() .. " ->\n"
+            \ echo 'Sessions in ' .. GetSesDir() .. " ->\n"
                 \ .. ListSes('', '', 0)
 # saves a session in sessions_dir
-command -nargs=? -bang -bar -complete=custom,<SID>ListSes SaveSession
+command -nargs=? -bang -bar -complete=custom,ListSes SaveSession
             \ execute 'mks' .. <q-bang> .. ' ' .. GetSesName(<f-args>)
 # loads a session from sessions_dir
-command -nargs=? -bar -complete=custom,<SID>ListSes LoadSession
+command -nargs=? -bar -complete=custom,ListSes LoadSession
             \ execute 'source ' .. GetSesName(<f-args>)
 # deletes a session from sessions_dir
-command -nargs=? -bar -complete=custom,<SID>ListSes DelSession
+command -nargs=? -bar -complete=custom,ListSes DelSession
             \ delete(GetSesName(<f-args>))
 
-function s:GetSesDir()
+def GetSesDir(): string
     if !exists("g:sessions_dir") || g:sessions_dir == ""
-        let g:sessions_dir = $HOME .. '/.vim/sessions'
+        g:sessions_dir = $HOME .. '/.vim/sessions'
     endif
     if !isdirectory(g:sessions_dir)
-        call mkdir(g:sessions_dir, 'p')
+        mkdir(g:sessions_dir, 'p')
     endif
     if g:sessions_dir !~# '/$'
-        let g:sessions_dir ..= '/'
+        g:sessions_dir ..= '/'
     endif
     return g:sessions_dir
-endfunction
+enddef
 
-function s:ListSes(arglead, cmdline, cursorpos)
-    return readdir(s:GetSesDir())
+def ListSes(arglead: string, cmdline: string, cursorpos: number): string
+    return readdir(GetSesDir())
                 \ ->join("\n")
                 \ ->substitute('\.vim\(\n\|$\)', '\1', 'g')
-endfunction
+enddef
 
-def s:GetSesName(ses = ""): string
+def GetSesName(ses = ""): string
     if v:this_session != "" && ses == ""
         return v:this_session
     endif
-    return s:GetSesDir()
+    return GetSesDir()
                 \ .. substitute(
                     \ ses ?? fnamemodify(getcwd(), ':t'),
                     \ '\.', '_', 'g'
