@@ -1,3 +1,6 @@
+" Minor changes to align closing > with opening <tag for multi-line attributes
+
+
 " Vim indent script for HTML
 " Maintainer:	Bram Moolenaar
 " Original Author: Andy Wokula <anwoku@yahoo.de>
@@ -932,6 +935,12 @@ func s:InsideTag(foundHtmlString)
     endif
   endif
 
+  " Check if the line is just the closing of the tag
+  let not_closing_line = 1
+  if getline(v:lnum) =~ '^\s*\(/\)\?>'
+    let not_closing_line = 0
+  endif
+
   " Should be another attribute: " attr="val".  Align with the previous
   " attribute start.
   let lnum = v:lnum
@@ -959,13 +968,13 @@ func s:InsideTag(foundHtmlString)
       let idx = match(text, '<' . s:tagname . '$')
       if idx >= 0
 	call cursor(lnum, idx + 1)
-	return virtcol('.') - 1 + shiftwidth() * b:hi_attr_indent
+	return virtcol('.') - 1 + shiftwidth() * not_closing_line * b:hi_attr_indent
       endif
     endif
     if idx > 0
       " Found the attribute to align with.
       call cursor(lnum, idx)
-      return virtcol('.')
+      return virtcol('.') - shiftwidth() * b:hi_attr_indent * (1 - not_closing_line)
     endif
   endwhile
   return -1
