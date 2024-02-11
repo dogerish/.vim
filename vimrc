@@ -82,7 +82,9 @@ endif
 set backspace=indent,eol,start
 
 " :h fo-table
-set formatoptions=croqwan2j
+set formatoptions=cro/qwan2j
+" don't use > as a comment character
+set comments-=n:>
 " don't join to use two spaces after end of sentence
 set nojoinspaces
 set spelllang=en_us,de

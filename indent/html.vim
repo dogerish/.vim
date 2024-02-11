@@ -264,6 +264,26 @@ call s:AddBlockTag('<!--', 5, '-->')
 call s:AddBlockTag('<!--[', 6, '![endif]-->')
 "}}}
 
+" Check if the cursor is in a string highlight and if it is inside a tag. 
+" Returns [<in string?>, <in tag?>]
+func s:CursorInString()
+  "{{{
+  let stack = synstack(v:lnum, col('.'))  " assumes there are no tabs
+  let inHtmlString = 0
+  let inHtmlTag = 0
+  for synid in reverse(stack)
+    let name = synIDattr(synid, "name")
+    if index(b:hi_insideStringNames, name) >= 0
+      let inHtmlString = 1
+    elseif index(b:hi_insideTagNames, name) >= 0
+      " Yes, we are inside a tag.
+      let inHtmlTag = 1
+      break
+    endif
+  endfor
+  return [inHtmlString, inHtmlTag]
+endfunc "}}}
+
 " Return non-zero when "tagname" is an opening tag, not being a block tag, for
 " which there should be a closing tag.  Can be used by scripts that include
 " HTML indenting.
@@ -865,13 +885,12 @@ func HtmlIndent_FindTagStart(lnum)
   " - the matching line number or "lnum".
   " - a flag indicating whether we found the end of a tag.
   " This method is global so that HTML-like indenters can use it.
-  " To avoid matching " > " or " < " inside a string require that the opening
-  " "<" is followed by a word character and the closing ">" comes after a
-  " non-white character.
-  let idx = match(getline(a:lnum), '\S>\s*$')
+  " To avoid matching " > " or " < " inside a string, check that the match is 
+  " outside of a string highlight.
+  let idx = match(getline(a:lnum), '>\s*$')
   if idx > 0
     call cursor(a:lnum, idx)
-    let lnum = searchpair('<\w', '' , '\S>', 'bW', '', max([a:lnum - b:html_indent_line_limit, 0]))
+    let lnum = searchpair('<', '' , '>', 'bW', 's:CursorInString()[0]', max([a:lnum - b:html_indent_line_limit, 0]))
     if lnum > 0
       return [lnum, 1]
     endif
@@ -952,13 +971,7 @@ func s:InsideTag(foundHtmlString)
     "  <tag attr=
     "  text<tag attr=
     "  <tag>text</tag>text<tag attr=
-    " For long lines search for the first match, finding the last match
-    " gets very slow.
-    if len(text) < 300
-      let idx = match(text, '.*\s\zs[_a-zA-Z0-9-]\+="')
-    else
-      let idx = match(text, '\s\zs[_a-zA-Z0-9-]\+="')
-    endif
+    let idx = match(text, '\s\zs[_a-zA-Z0-9-:]\+="')
     if idx == -1
       " try <tag attr
       let idx = match(text, '<' . s:tagname . '\s\+\zs\w')
@@ -999,22 +1012,15 @@ func HtmlIndent()
   " "<", it gets the "htmlTag" ID but we are not inside a tag then.
   if curtext !~ '^\s*<'
     normal! ^
-    let stack = synstack(v:lnum, col('.'))  " assumes there are no tabs
-    let foundHtmlString = 0
-    for synid in reverse(stack)
-      let name = synIDattr(synid, "name")
-      if index(b:hi_insideStringNames, name) >= 0
-        let foundHtmlString = 1
-      elseif index(b:hi_insideTagNames, name) >= 0
-        " Yes, we are inside a tag.
-        let indent = s:InsideTag(foundHtmlString)
-        if indent >= 0
-          " Do not keep the state. TODO: could keep the block type.
-          let b:hi_indent.lnum = 0
-          return indent
-        endif
+    let [foundHtmlString, inHtmlTag] = s:CursorInString()
+    if inHtmlTag
+      let indent = s:InsideTag(foundHtmlString)
+      if indent >= 0
+        " Do not keep the state. TODO: could keep the block type.
+        let b:hi_indent.lnum = 0
+        return indent
       endif
-    endfor
+    endif
   endif
 
   " does the line start with a closing tag?
